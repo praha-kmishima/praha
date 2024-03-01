@@ -1,7 +1,7 @@
--- 商品
+-- 商品登録
 INSERT INTO products (id, name, price, is_set)
 VALUES 
-  -- セット
+  -- セット商品
   (1, 'はな', 8650, true), 
   (2, 'わだつみ', 5680, true), 
   (3, 'あさなぎ', 4440, true),
@@ -78,12 +78,13 @@ VALUES
   (64, 'うに', 600, false), 
   (65, 'インドまぐろ大トロ', 600, false);
 
+-- オプション登録
 INSERT INTO options (id, name)
 VALUES 
   (1, 'わさび抜き'),
   (2, 'シャリ半分');
 
--- 顧客
+-- 顧客登録
 INSERT INTO customers (id, name, phone_number)
 VALUES 
   (1, '三島 賢祐', '000-0000-0000');
