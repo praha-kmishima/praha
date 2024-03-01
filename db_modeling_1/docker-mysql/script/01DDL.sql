@@ -18,10 +18,7 @@ CREATE TABLE `products` (
 CREATE TABLE `orders` (
   `id` INT PRIMARY KEY,
   `customer_id` INT NOT NULL,
-  `order_amount` INT NOT NULL,
-  `is_paid` BOOLEAN NOT NULL,
-  `created_at` DATETIME DEFAULT (CURRENT_TIMESTAMP),
-  `updated_at` DATETIME DEFAULT (CURRENT_TIMESTAMP)
+  `created_at` DATETIME DEFAULT (CURRENT_TIMESTAMP)
 );
 
 CREATE TABLE `options` (
