@@ -2,7 +2,7 @@
 
 ## ER図
 
-![ER図](https://gyazo.com/109cec55103073812afe71b0e1195e71)
+<img src="https://github.com/kmishima16/praha/blob/image/db_modeling_1/images/Copy%20of%20DB%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B01%20%E5%AF%BF%E5%8F%B8%E6%B3%A8%E6%96%87DB.png" alt="寿司DBのER図" title="寿司DBのER図">
 
 https://dbdiagram.io/d/DBモデリング1-寿司注文DB-65db06525cd0412774bf0ea7  
 NULL制約
