@@ -1,7 +1,7 @@
--- 商品
+-- 商品登録
 INSERT INTO products (id, name, price, is_set)
 VALUES 
-  -- セット
+  -- セット商品
   (1, 'はな', 8650, true), 
   (2, 'わだつみ', 5680, true), 
   (3, 'あさなぎ', 4440, true),
@@ -78,23 +78,24 @@ VALUES
   (64, 'うに', 600, false), 
   (65, 'インドまぐろ大トロ', 600, false);
 
+-- オプション登録
 INSERT INTO options (id, name)
 VALUES 
   (1, 'わさび抜き'),
   (2, 'シャリ半分');
 
--- 顧客
+-- 顧客登録
 INSERT INTO customers (id, name, phone_number)
 VALUES 
   (1, '三島 賢祐', '000-0000-0000');
 
--- 注文
-INSERT INTO orders (id, customer_id, is_paid)
+-- 注文レコード登録
+INSERT INTO orders (id, customer_id)
 VALUES 
-  (1, 1, true);
+  (1, 1);
 
--- 注文詳細
-INSERT INTO order_items (id, order_id, product_id, option_id, quantity)
+-- 注文詳細登録
+INSERT INTO order_details (id, order_id, product_id, option_id, quantity)
 VALUES 
   (1, 1, 1, null, 1),
   (2, 1, 15, 1, 2),
@@ -103,3 +104,15 @@ VALUES
   (5, 1, 54, null, 1),
   (6, 1, 59, null, 1),
   (7, 1, 61, null, 1);
+
+-- 注文合計金額のVIEW作成
+CREATE VIEW `order_amount` AS
+    SELECT 
+        `o`.`order_id` AS `order_id`,
+        `os`.`customer_id` AS `customer_id`,
+        SUM(`p`.`price`) AS `SUM(p.price)` as "total_amount"
+    FROM
+        ((`order_details` `o`
+        JOIN `products` `p` ON ((`o`.`product_id` = `p`.`id`)))
+        JOIN `orders` `os` ON ((`o`.`order_id` = `os`.`id`)))
+    GROUP BY `o`.`order_id`
