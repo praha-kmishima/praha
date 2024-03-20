@@ -227,7 +227,7 @@ INSERT INTO options (id, name) VALUES
 
 -- クーポンとクーポン割引タイプのデータ挿入
 INSERT INTO coupons (id, type) VALUES
-(1, '会計10%割引'),
-(2, '会計100円引き');
+(1, '1皿無料'),
+(2, '50円引き');
 
 
