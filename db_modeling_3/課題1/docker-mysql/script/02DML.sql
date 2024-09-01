@@ -1,28 +1,25 @@
--- ユーザを追加
+-- ユーザ
 INSERT INTO user (name) VALUES 
-    ('John'),
-    ('Alice'),
-    ('Bob'),
-    ('Dan'),
-    ('Rick');
+    ('ユーザA'),
+    ('ユーザB'),
+    ('ユーザC');
 
--- 親フォルダを追加
+-- フォルダ
 INSERT INTO directory (user_id, name) VALUES 
-    (1, "親A"),
-    (1, "親B"),
-    (2, "親C");
+    (1, "フォルダA"),
+    (1, "フォルダB"),
+    (2, "フォルダC");
 
-
--- 各親フォルダにファイルを追加
-INSERT INTO document (directory_id, user_id, name) VALUES 
-    (1, 3, "ファイルA1"),
-    (2, 4, "ファイルB1"),
-    (3, 5, "ファイルC1");
-
--- フォルダの親子関係レコード追加
-INSERT INTO directory_relationship (parent_id, child_id) VALUES 
+INSERT INTO directory_tree (parent_id, child_id) VALUES 
     (1, 1),
     (2, 2),
     (3, 3);
+
+-- フォルダにファイルを追加
+INSERT INTO document (directory_id, user_id, name) VALUES 
+    (1, 1, "ファイルA1"),
+    (2, 2, "ファイルB1"),
+    (3, 3, "ファイルC1");
+
 
 
