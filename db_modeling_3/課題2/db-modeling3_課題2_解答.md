@@ -67,14 +67,17 @@
 ![alt text](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-6.png)
 
 stackoverflowにも、並び順の仕様についての質問があった
+
 - [Trello のようにカードやリストを並べ替えるにはどうすればいいですか?](https://stackoverflow.com/questions/60896229/how-to-rearrange-cards-and-lists-like-trello)
 - [Trelloはカード、リスト、チェックリストなどの並べ替えをどのように処理しますか](https://stackoverflow.com/questions/29791543/how-does-trello-handle-rearrangement-of-cards-lists-checklists-etc)
 
 Trelloは、移動先の位置によって`pos`の値を設定しているらしい
+
 - リストの一番下：現在の`pos`の最大値+α
 - リストの一番上：現在の`pos`の最小値/2
 - それ以外：隣接する２つの項目の平均
 
 このやり方だと、`pos`の値が大きくなり、データサイズが無駄に大きくなってしまう懸念があるが、Lexorankというアルゴリズムを使えばデータサイズを減らした形で2つの項目の間の値を設定することができるらしい。
+
 - [githubに公開されているlexorank.jsのライブラリ](https://github.com/acadea/lexorank)
 - [zenn-LexoRankで任意順ソートを効率的に保存する](https://zenn.dev/moroya/articles/001745a74c74d5)
