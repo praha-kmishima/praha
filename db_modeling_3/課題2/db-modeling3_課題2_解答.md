@@ -10,7 +10,7 @@
 
 ### ER図
 
-![ER](ER図.png)
+![ER](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/ER%E5%9B%B3.png)
 
 新しく、`document_order`テーブルを追加して、各ディレクトリのドキュメントの並び順はこのテーブルで管理する。例えば、タスク1,2,3のドキュメントがある場合、以下のような並びになる。
 
@@ -44,13 +44,13 @@
 
 入れ替えてみる
 
-![alt text](image.png)
+![alt text]([image.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image.png))
 
-![alt text](image-1.png)
+![alt text]([image-1.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-1.png))
 
 リクエストを確認してみると、`targetVisibleIndex:3`のリクエストが発行されている。各レコードの並び順は`targetVisibleIndex`が昇順になるように表示している？
 
-![alt text](image-2.png)
+![alt text]([image-2.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-2.png))
 
 おそらく、項目を入れ替えるたびにテーブル内の全ての項目の`targetVisibleIndex`を再設定している？（あまり効率は良くなさそうだが、、）
 
@@ -58,13 +58,13 @@
 
 入れ替えてみる
 
-![alt text](image-3.png)
+![alt text]([image-3.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-3.png))
 
-![alt text](image-5.png)
+![alt text]([image-5.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-5.png))
 
 リクエストをいくつか確認してみたところ、`pos`の値が並び順を示していそう
 
-![alt text](image-6.png)
+![alt text]([image-6.png](https://github.com/kmishima16/praha/blob/feature/db_modeling_3/%E8%AA%B2%E9%A1%8C2/image-6.png))
 
 stackoverflowにも、並び順の仕様についての質問があった
 - [Trello のようにカードやリストを並べ替えるにはどうすればいいですか?](https://stackoverflow.com/questions/60896229/how-to-rearrange-cards-and-lists-like-trello)
