@@ -1,4 +1,4 @@
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP)
@@ -9,17 +9,17 @@ CREATE TABLE `directory` (
   `user_id` int,
   `name` varchar(255),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
-CREATE TABLE `document` (
+CREATE TABLE `documents` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `directory_id` int NOT NULL,
   `user_id` int,
   `name` varchar(255),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP),
   FOREIGN KEY (`directory_id`) REFERENCES `directory` (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
 CREATE TABLE `directory_tree` (
