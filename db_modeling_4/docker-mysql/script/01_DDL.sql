@@ -1,6 +1,6 @@
 CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `account_name` varchar(255) NOT NULL,
+  `account_name` varchar(255) NOT NULL UNIQUE,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
