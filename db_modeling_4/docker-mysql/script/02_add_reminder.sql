@@ -17,6 +17,6 @@ WHERE u1.account_name = @register_user_name AND u2.account_name = @send_user_nam
 
 -- 3. scheduled_remindersテーブルの挿入
 INSERT INTO scheduled_reminders (id, scheduled_at)
-SELECT r.id, NOW() + INTERVAL 1 DAY
+SELECT r.id, NOW()
 FROM reminders r
 WHERE r.reminder_id = (SELECT id FROM users WHERE account_name = @register_user_name);
