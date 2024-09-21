@@ -6,26 +6,26 @@ CREATE TABLE `users` (
 
 CREATE TABLE `reminders` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `reminder_id` int NOT NULL,
-  `sender_id` int NOT NULL,
-  `message` varchar(255) NOT NULL,
+  `regist_user_id` int NOT NULL,
+  `receive_user_id` int NOT NULL,
+  `remind_message` varchar(255) NOT NULL,
   `cycle_message` varchar(255) NOT NULL,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`reminder_id`) REFERENCES `users` (`id`),
-  FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`regist_user_id`) REFERENCES `users` (`id`),
+  FOREIGN KEY (`receive_user_id`) REFERENCES `users` (`id`)
 );
 
 CREATE TABLE `scheduled_reminders` (
-  `id` int NOT NULL,
+  `reminder_id` int NOT NULL,
   `scheduled_at` timestamp NOT NULL,
-  PRIMARY KEY (`id`, `scheduled_at`),
-  FOREIGN KEY (`id`) REFERENCES `reminders` (`id`)
+  PRIMARY KEY (`reminder_id`, `scheduled_at`),
+  FOREIGN KEY (`reminder_id`) REFERENCES `reminders` (`id`)
 );
 
 
 CREATE TABLE `completed_reminders` (
-  `id` int NOT NULL,
+  `reminder_id` int NOT NULL,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `created_at`),
-  FOREIGN KEY (`id`) REFERENCES `reminders` (`id`)
+  PRIMARY KEY (`reminder_id`, `created_at`),
+  FOREIGN KEY (`reminder_id`) REFERENCES `reminders` (`id`)
 );
