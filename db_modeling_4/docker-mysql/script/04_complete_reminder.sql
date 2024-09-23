@@ -1,5 +1,5 @@
 -- リマインダーが完了した場合の処理
-SET @completed_remind_id = 1;
+SET @completed_remind_id = 2;
 
 -- 1. scheduled_remindersから対象idを削除
 DELETE FROM scheduled_reminders WHERE reminder_id = @completed_remind_id;

@@ -1,19 +1,15 @@
--- リマインダーを送信する場合の処理
-SET @scheduled_remind_id = NULL;
+-- 1.リマインダーを送信する場合の処理
+-- リマインドid=2をリマインドする場合
+SET @scheduled_remind_id = 2; 
 
--- 1. scheduled_remindersからリマインダー対象のid取得
-SELECT reminder_id INTO @scheduled_remind_id
-FROM scheduled_reminders 
-WHERE scheduled_at <= NOW();
-
--- 2. remindersからリマインド文と送信先ユーザ名を取得
+-- 2. remindersからリマインドと送信先ユーザのデータを取得してリマインドを送る
 SELECT r.remind_message AS `リマインド文章`, u.account_name AS `送信先ユーザ名`
 FROM reminders r
 JOIN users u ON r.receive_user_id = u.id
 WHERE r.id = @scheduled_remind_id;
 
--- 3. 次回リマインダー日付を再登録
+-- 3. 送信後、次回リマインダー日付を再登録する
 UPDATE scheduled_reminders 
-SET scheduled_at = NOW() + INTERVAL 1 DAY 
+SET scheduled_at = NOW() + INTERVAL 3 HOUR 
 WHERE reminder_id = @scheduled_remind_id;
 
