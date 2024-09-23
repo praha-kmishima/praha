@@ -1,13 +1,15 @@
 -- リマインダーが登録された場合の処理
 SET @regist_user_name = 'hogehoge';
+SET @regist_user_id = '@hoge_hoge';
 SET @receive_user_name = 'kmishima';
+SET @receive_user_id = '@k_mishima';
 
 -- 1. usersテーブルの挿入
-INSERT INTO users (account_name) 
-VALUES (@regist_user_name);
+INSERT INTO users (account_name, slack_id) 
+VALUES (@regist_user_name, @regist_user_id);
 
-INSERT INTO users (account_name) 
-VALUES (@receive_user_name);
+INSERT INTO users (account_name, slack_id) 
+VALUES (@receive_user_name, @receive_user_id);
 
 -- 2. remindersテーブルの挿入
 INSERT INTO reminders (regist_user_id, receive_user_id, remind_message, cycle_message)
