@@ -11,5 +11,6 @@ CREATE TABLE `articles` (
   `subject` varchar(255) NOT NULL,
   `content` varchar(3000) NOT NULL,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
