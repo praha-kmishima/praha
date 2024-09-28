@@ -13,7 +13,7 @@ SET @now_content = NULL;
 SELECT subject, content
 INTO @now_subject, @now_content
 FROM articles
-WHERE id = @update_article_id and history = 0;
+WHERE id = @update_article_id;
 
 -- 記事履歴をINSERT
 INSERT INTO articles(user_id, history, subject, content)
