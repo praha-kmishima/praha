@@ -7,11 +7,11 @@ SELECT SLEEP(1);
 -- 現在の記事データを取得
 SET @user_id = 1;
 SET @update_article_id = 1;
-SET @prev_subject = NULL;
-SET @prev_content = NULL;
+SET @now_subject = NULL;
+SET @now_content = NULL;
 
 SELECT subject, content
-INTO @prev_subject, @prev_content
+INTO @now_subject, @now_content
 FROM articles
 WHERE id = @update_article_id and history = 0;
 
@@ -20,8 +20,8 @@ INSERT INTO articles(user_id, history, subject, content)
 VALUES(
     @user_id,
     @update_article_id,
-    @prev_subject,
-    @prev_content
+    @now_subject,
+    @now_content
 );
 
 -- 2.記事を復元する
