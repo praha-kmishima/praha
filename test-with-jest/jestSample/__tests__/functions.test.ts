@@ -7,6 +7,11 @@ describe('sumOfArray', () => {
         expect(sumOfArray([-1, -2, -3, -4])).toBe(-10);
     });
 
+    test('空の配列を渡した場合は0を返す', () => {
+        expect(sumOfArray([])).toBe(0);
+    });
+
+
 });
 
 
