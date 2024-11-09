@@ -32,10 +32,15 @@ export const asyncSumOfArraySometimesZero = (
   });
 };
 
+// NameApiServiceが満たすべきインターフェース
+interface INameApiService {
+  getFirstName: () => Promise<string>;
+}
+
 export const getFirstNameThrowIfLong = async (
-  maxNameLength: number
+  maxNameLength: number,
+  nameApiService: INameApiService
 ): Promise<string> => {
-  const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
   const firstName = await nameApiService.getFirstName();
 
   if (firstName.length > maxNameLength) {

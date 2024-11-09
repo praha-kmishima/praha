@@ -38,6 +38,26 @@ describe('asyncSumOfArraySometimesZero', () => {
     });
 });
 
+// getFirstNameThrowIfLongのテスト
+import { getFirstNameThrowIfLong } from "../functions";
+describe('getFirstNameThrowIfLong', () => {
+    test('firstNameが指定した文字数以下の場合、firstNameを返す', async () => {
+        const maxNameLength = 4;
+        // NameApiServiceのモック(成功時)
+        const nameApiService = {
+            getFirstName: jest.fn().mockResolvedValue('ok')
+        };
+        await expect(getFirstNameThrowIfLong(maxNameLength, nameApiService)).resolves.toBe('ok');
+    });
 
-
+    test('maxNameLengthが2の場合で、3文字の名前を取得するとエラーになる', async () => {
+        const maxNameLength = 2;
+        // NameApiServiceのモック(成功時)
+        const nameApiService = {
+            getFirstName: jest.fn().mockResolvedValue('てすと')
+        };
+        await expect(getFirstNameThrowIfLong(maxNameLength, nameApiService)).rejects.toThrow('first_name too long');
+    });
+    
+});
 
