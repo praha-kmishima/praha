@@ -11,12 +11,19 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
   });
 };
 
+
+// DatabaseMockが満たすべきインターフェース
+interface IDatabase {
+  save: (numbers: number[]) => void;
+};
+
+
 export const asyncSumOfArraySometimesZero = (
-  numbers: number[]
+  numbers: number[],
+  database: IDatabase
 ): Promise<number> => {
   return new Promise((resolve): void => {
     try {
-      const database = new DatabaseMock(); // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
       database.save(numbers);
       resolve(sumOfArray(numbers));
     } catch (error) {
