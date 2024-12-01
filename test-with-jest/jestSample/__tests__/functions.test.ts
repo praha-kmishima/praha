@@ -1,6 +1,9 @@
 import { sumOfArray, asyncSumOfArray, asyncSumOfArraySometimesZero } from "../functions";
 
 describe('sumOfArray', () => {
+    test('配列が空の場合、0を返す', () => {
+        expect(sumOfArray([])).toBe(0);
+    });
     test('配列内の数値の合計値を返す', () => {
         expect(sumOfArray([1, 2, 3, 4])).toBe(10);
         expect(sumOfArray([0, 0, 0, 0])).toBe(0);
