@@ -25,3 +25,8 @@ export const OWins = Template.bind({});
 OWins.args = {
         squares: ['O', 'X', 'O', 'X', 'O', 'X', 'O', null, null],
 };
+
+export const AllTriangle = Template.bind({});
+AllTriangle.args = {
+        squares: ['△', '△','△','△','△','△','△','△','△'],
+};
