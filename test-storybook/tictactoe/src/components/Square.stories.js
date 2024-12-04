@@ -11,8 +11,18 @@ const Template = (args) => <Square {...args} />;
 
 export const Empty = Template.bind({});
 Empty.args = {
-  square: {
     value: null,
     onclick: () => {},
-    }
+};
+
+export const IsX = Template.bind({});
+IsX.args = {
+    value: "x",
+    onclick: () => {},
+};
+
+export const IsO = Template.bind({});
+IsO.args = {
+    value: "O",
+    onclick: () => {},
 };
