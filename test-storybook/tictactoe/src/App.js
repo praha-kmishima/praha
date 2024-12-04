@@ -54,19 +54,18 @@ function Board({ xisNext, squares, onPlay }) {
 }
 
 export default function Game() {
-  const [xisNext, setXisNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const xisNext = currentMove % 2 === 0; 
   const currentSquares = history[currentMove];
   function handlePlay(nextSquares){
-    setHistory([...history, nextSquares]);
-    setXisNext(!xisNext)
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   }
 
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
-    setXisNext((nextMove % 2) === 0);
-    setHistory(history.slice(0, nextMove + 1));
   }
 
   const moves = history.map((step, move) => {
