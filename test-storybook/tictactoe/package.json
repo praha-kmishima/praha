@@ -7,14 +7,29 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start:tictactoe": "npm start --prefix test-storybook/tictactoe"
+    "start:tictactoe": "npm start --prefix test-storybook/tictactoe",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "^5.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@storybook/addon-essentials": "^8.4.6",
+    "@storybook/addon-interactions": "^8.4.6",
+    "@storybook/addon-onboarding": "^8.4.6",
+    "@storybook/blocks": "^8.4.6",
+    "@storybook/preset-create-react-app": "^8.4.6",
+    "@storybook/react": "^8.4.6",
+    "@storybook/react-webpack5": "^8.4.6",
+    "@storybook/test": "^8.4.6",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.4.6",
+    "webpack": "^5.97.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
