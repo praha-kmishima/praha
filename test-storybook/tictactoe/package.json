@@ -10,7 +10,7 @@
     "start:tictactoe": "npm start --prefix test-storybook/tictactoe",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storycap": "storycap --serverCmd \"npx http-server storybook-static -p 6006\" http://localhost:6006"
+    "storycap": "storycap --serverCmd \"npx http-server storybook-static -p 6006\" http://127.0.0.1:6006"
   },
   "dependencies": {
     "react": "^18.0.0",

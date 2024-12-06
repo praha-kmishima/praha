@@ -1,3 +1,7 @@
+import { withScreenshot } from "storycap";
+
+export const decorators = [withScreenshot];
+
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {
