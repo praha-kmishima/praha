@@ -69,6 +69,8 @@
     padding: 0;
     text-align: center;
     width: 34px;
+    /* 赤色に変更 */
+    color: red;
   }
   
   .board-row:after {
