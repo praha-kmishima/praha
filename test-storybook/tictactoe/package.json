@@ -27,6 +27,10 @@
     "@storybook/react-webpack5": "^8.4.6",
     "@storybook/test": "^8.4.6",
     "prop-types": "^15.8.1",
+    "reg-keygen-git-hash-plugin": "^0.14.3",
+    "reg-notify-github-plugin": "^0.14.4",
+    "reg-publish-s3-plugin": "^0.14.4",
+    "reg-suit": "^0.14.4",
     "storybook": "^8.4.6",
     "webpack": "^5.97.0"
   },
