@@ -2,4 +2,5 @@ local/
 */node_modules/
 node_modules
 
+storybook-static/
 *storybook.log
