@@ -56,22 +56,26 @@ describe('asyncSumOfArraySometimesZero', () => {
 // getFirstNameThrowIfLongのテスト
 import { getFirstNameThrowIfLong } from "../functions";
 describe('getFirstNameThrowIfLong', () => {
-    test('firstNameが指定した文字数以下の場合、firstNameを返す', async () => {
-        const maxNameLength = 4;
-        // NameApiServiceのモック(成功時)
-        const nameApiService = {
-            getFirstName: jest.fn().mockResolvedValue('ok')
-        };
-        await expect(getFirstNameThrowIfLong(maxNameLength, nameApiService)).resolves.toBe('ok');
+    const nameApiService = {
+        getFirstName: jest.fn()
+    };
+    test('指定文字数以下であれば苗字を返す', async () => {
+        const len = 4;
+        nameApiService.getFirstName.mockResolvedValue('三島');
+        const result = await getFirstNameThrowIfLong(len, nameApiService);    
+        expect(result).toBe('三島');
     });
 
-    test('maxNameLengthが2の場合で、3文字の名前を取得するとエラーになる', async () => {
-        const maxNameLength = 2;
-        // NameApiServiceのモック(成功時)
-        const nameApiService = {
-            getFirstName: jest.fn().mockResolvedValue('てすと')
-        };
-        await expect(getFirstNameThrowIfLong(maxNameLength, nameApiService)).rejects.toThrow('first_name too long');
+    test('指定文字数を超える苗字だとエラーを返す', async () => {
+        const len = 4;
+        nameApiService.getFirstName.mockResolvedValue('プラハチャレンジ');
+        await expect(getFirstNameThrowIfLong(len, nameApiService)).rejects.toThrow('first_name too long');
+    });
+
+    test('渡された苗字取得クラス側でエラーが起こる場合もある', async () => {
+        const len = 4;
+        nameApiService.getFirstName.mockRejectedValue(new Error());
+        await expect(getFirstNameThrowIfLong(len, nameApiService)).rejects.toThrow();
     });
     
 });
