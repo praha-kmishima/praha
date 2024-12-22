@@ -1,8 +1,8 @@
 import { sumOfArray, asyncSumOfArray, asyncSumOfArraySometimesZero } from "../functions";
 
 describe('sumOfArray', () => {
-    test('配列が空の場合、0を返す', () => {
-        expect(sumOfArray([])).toBe(0);
+    test('配列が空の場合、エラーを返す', () => {
+        expect(() => sumOfArray([])).toThrow(Error);
     });
     test('配列内の数値の合計値を返す', () => {
         expect(sumOfArray([1, 2, 3, 4])).toBe(10);
@@ -13,6 +13,10 @@ describe('sumOfArray', () => {
 });
 
 describe('asyncSumOfArray', () => {
+    test('配列が空の場合、エラーを返す', async () => {
+        await expect(asyncSumOfArray([])).rejects.toThrow(Error);
+    });
+
     test('配列内の数値の合計値を非同期で返す', async () => {
         await expect(asyncSumOfArray([1, 2, 3, 4])).resolves.toBe(10);
         await expect(asyncSumOfArray([0, 0, 0, 0])).resolves.toBe(0);
