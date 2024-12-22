@@ -5,21 +5,28 @@ interface ApiClient {
   get(): Promise<string>;
 }
 
-// APIにアクセスして苗字を返すクラスを作成
-export class FirstNameApiClient implements ApiClient {
-  public constructor() {
-  }
-  public async get(): Promise<string> {
-    const url = "https://random-data-api.com/api/name/random_name";
-    return await axios.get(url);
-  }
+interface NameResponse {
+  first_name: string;
 }
 
+// APIにアクセスして苗字を返すクラスを作成
+export class FirstNameApiClient implements ApiClient {
+  public async get(): Promise<string> {
+    const url = "https://random-data-api.com/api/name/random_name";
+    try {
+      const response = await axios.get<NameResponse>(url);
+      return response.data.first_name;
+    } catch (error) {
+      throw new Error("Failed to fetch first name from API.");
+    }
+  }
+}
 export class NameApiService {
-  private MAX_LENGTH = 4;
+  private MAX_LENGTH: number;
   private apiClient: ApiClient;
-  public constructor(apiClient: ApiClient) {
+  public constructor(apiClient: ApiClient, maxLength: number = 4) {
     this.apiClient = apiClient;
+    this.MAX_LENGTH = maxLength;
   }
 
   public async getFirstName(): Promise<string> {
