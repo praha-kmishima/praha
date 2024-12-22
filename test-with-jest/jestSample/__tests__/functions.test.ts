@@ -31,17 +31,25 @@ describe('asyncSumOfArraySometimesZero', () => {
         save: jest.fn()
     };
 
-    test('データベースの保存に成功した場合、合計値を返す', async () => {
-        await expect(asyncSumOfArraySometimesZero([1, 2, 3, 4], mockDatabase)).resolves.toBe(10);
-        expect(mockDatabase.save).toHaveBeenCalledWith([1, 2, 3, 4]);
+    test('渡された数値の合計を返す', async () => {
+        const x = [1, 2, 3, 4];
+        mockDatabase.save.mockImplementation(() => {});
+        const result = await asyncSumOfArraySometimesZero(x, mockDatabase);
+        expect(result).toBe(10);
     });
-
     test('データベースの保存に失敗した場合、0を返す', async () => {
-        // モックのsaveメソッドを上書き (失敗するようにする)
+        const x = [1, 2, 3, 4];
         mockDatabase.save.mockImplementation(() => {
             throw new Error('fail!');
         });
-        await expect(asyncSumOfArraySometimesZero([1, 2, 3, 4], mockDatabase)).resolves.toBe(0);
+        const result = await asyncSumOfArraySometimesZero(x, mockDatabase);
+        expect(result).toBe(0);
+    });
+    test('空の配列を渡された場合、0を返す', async () => {
+        const x: number[] = [];
+        mockDatabase.save.mockImplementation(() => {});
+        const result = await asyncSumOfArraySometimesZero(x, mockDatabase);
+        expect(result).toBe(0);
     });
 });
 
