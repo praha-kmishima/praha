@@ -3,10 +3,12 @@ id: 20250114T22433055
 aliases: []
 tags: []
 created: 2025-01-14T22:43:30
-updated: 2025-01-14T22:43
+updated: 2025-01-14T23:04
 ---
 
-# sumOfArray
+## sumOfArray
+
+### 単体テスト
 
 ```typescript
 // sumOfArray.test.ts
@@ -22,7 +24,9 @@ describe('sumOfArray', () => {
 });
 ```
 
-# asyncSumOfArray
+## asyncSumOfArray
+
+### 単体テスト
 
 ```typescript
 // asyncSumOfArray.test.ts

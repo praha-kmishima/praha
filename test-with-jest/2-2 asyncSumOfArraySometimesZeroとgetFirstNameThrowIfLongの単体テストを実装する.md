@@ -3,14 +3,14 @@ id: 20250114T22462921
 aliases: []
 tags: []
 created: 2025-01-14T22:46:29
-updated: 2025-01-14T22:56
+updated: 2025-01-14T23:04
 ---
 
-# asyncSumOfArraySometimesZero
+## asyncSumOfArraySometimesZero
 
 database を依存性注入ができる形に修正して、単体テストを作成しました。
 
-## 修正前
+### 修正前
 
 ```typescript
 export const asyncSumOfArraySometimesZero = (
@@ -51,7 +51,7 @@ export const asyncSumOfArraySometimesZero = (
 };
 ```
 
-## 単体テスト
+### 単体テスト
 
 `jest.fn()` と `mockImplementation()` で `database.save()` をモック化して、単体テストを実装しました
 
@@ -82,11 +82,11 @@ test('空の配列を渡された場合、0を返す', async () => {
 });
 ```
 
-# getFirstNameThrowIfLong
+## getFirstNameThrowIfLong
 
 `NameApiService` を依存性注入できるように修正して、単体テストを実装しました。
 
-## 修正前
+### 修正前
 
 ```typescript
 export const getFirstNameThrowIfLong = async (
@@ -102,7 +102,7 @@ export const getFirstNameThrowIfLong = async (
 };
 ```
 
-## 修正後
+### 修正後
 
 ```typescript
 // getFirstNameThrowIfLong.ts
@@ -124,7 +124,7 @@ export const getFirstNameThrowIfLong = async (
 };
 ```
 
-## 単体テスト
+### 単体テスト
 
 `jest.fn()` と `mockResolvedValue()`, `mockRejectedValue()` で `nameApiService.getFirstName()` をモック化して、単体テストを実装しました
 
