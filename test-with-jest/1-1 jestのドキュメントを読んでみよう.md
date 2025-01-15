@@ -1,9 +1,10 @@
 ---
 id: 20250114T22402398
-aliases: []
-tags: []
+aliases: 
+tags:
+  - review
 created: 2025-01-14T22:40:23
-updated: 2025-01-14T22:40
+updated: 2025-01-14T23:16
 ---
 
 ## ドキュメントを読んだ感想

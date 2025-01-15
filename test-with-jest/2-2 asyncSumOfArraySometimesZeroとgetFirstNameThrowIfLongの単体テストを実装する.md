@@ -1,14 +1,17 @@
 ---
 id: 20250114T22462921
 aliases: []
-tags: []
+tags:
+  - review
 created: 2025-01-14T22:46:29
-updated: 2025-01-14T23:04
+updated: 2025-01-15T22:02
 ---
 
 ## asyncSumOfArraySometimesZero
 
-database を依存性注入ができる形に修正して、単体テストを作成しました。
+### コードの変更
+
+database を依存性注入ができる形に変更して、単体テストを作成しました。
 
 ### 修正前
 
@@ -84,9 +87,9 @@ test('空の配列を渡された場合、0を返す', async () => {
 
 ## getFirstNameThrowIfLong
 
-`NameApiService` を依存性注入できるように修正して、単体テストを実装しました。
+`NameApiService` を依存性注入できるように変更して、単体テストを実装しました。
 
-### 修正前
+### 変更前
 
 ```typescript
 export const getFirstNameThrowIfLong = async (

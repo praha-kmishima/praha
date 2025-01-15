@@ -1,12 +1,21 @@
 ---
 id: 20250114T22433055
-aliases: []
-tags: []
+aliases: 
+tags:
+  - review
 created: 2025-01-14T22:43:30
-updated: 2025-01-14T23:04
+updated: 2025-01-15T22:04
 ---
 
 ## sumOfArray
+
+### 実装
+
+```typescript
+export const sumOfArray = (numbers: number[]): number => {
+  return numbers.reduce((a: number, b: number): number => a + b);
+};
+```
 
 ### 単体テスト
 
@@ -25,6 +34,16 @@ describe('sumOfArray', () => {
 ```
 
 ## asyncSumOfArray
+
+### 実装
+
+```typescript
+export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
+  return new Promise((resolve): void => {
+    resolve(sumOfArray(numbers));
+  });
+};
+```
 
 ### 単体テスト
 
