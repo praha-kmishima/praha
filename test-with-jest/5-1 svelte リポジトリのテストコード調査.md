@@ -5,6 +5,9 @@ tags:
   - review
 created: 2025-01-15T22:24:39
 updated: 2025-01-15T22:24
+sr-due: 2025-01-21
+sr-interval: 3
+sr-ease: 250
 ---
 確認したコード
 [svelte/packages/svelte/tests/store/test.ts at main · sveltejs/svelte · GitHub](https://github.com/sveltejs/svelte/blob/main/packages/svelte/tests/store/test.ts)

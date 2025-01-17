@@ -5,6 +5,9 @@ tags:
   - review
 created: 2025-01-14T22:40:23
 updated: 2025-01-14T23:16
+sr-due: 2025-01-21
+sr-interval: 3
+sr-ease: 250
 ---
 
 ## ドキュメントを読んだ感想

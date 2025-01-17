@@ -5,6 +5,9 @@ tags:
   - review
 created: 2025-01-14T22:43:30
 updated: 2025-01-15T22:04
+sr-due: 2025-01-21
+sr-interval: 3
+sr-ease: 250
 ---
 
 ## sumOfArray
