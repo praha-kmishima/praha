@@ -12,13 +12,13 @@ updated: 2025-01-20T21:39:00
 
 ## 2-2 story の作成
 
-各コンポーネントの story を作成しました。
+各コンポーネントの story を作成しました
 
 なお、チュートリアル実施状態では各コンポーネントが１つの app.js のファイルの中にまとめられていたため、
 - `Board.jsx`
 - `Square.jsx`
 - `Game.jsx`
-にそれぞれファイルを切り出した後、各コンポーネントに対する story を作成しています。
+にそれぞれファイルを切り出した後、各コンポーネントに対する story を作成しています
 
 ### Board コンポーネントの story
 
@@ -110,7 +110,7 @@ export default preview;
 
 ### story の実装
 
-Board に渡す引数を、`args` で設定した。
+Board に渡す引数の squares を全て△にして、`args` で設定しました
 
 ```tsx
 import Board from "./Board";
@@ -134,7 +134,7 @@ export const AllTriangles = {
 
 ### web ページでの表示
 
-storybook 上に△で埋め尽くした状態の story が表示されるようになった。
+storybook 上に△で埋め尽くした状態の story が表示されるようになりました
 ![](attachments/Pasted%20image%2020250120214249.png)
 
 ## 2-4
@@ -201,8 +201,8 @@ export const WinningScenario = {
 
 ### 動作確認
 
-ゲーム開始から終了までの動作が実行されています。
+ゲーム開始から終了までの動作が実行されています
 
-（userEvent.click がされるたびに盤面の位置が動いているが、おそらく css のスタイリングの問題）
+（userEvent.click がされるたびに盤面の位置が動いているが、おそらく css のスタイリングの問題だと思われる）
 
 ![Gyazo](https://gyazo.com/665b0d22c790cd8118c472df8568732a.gif)
