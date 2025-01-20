@@ -135,6 +135,7 @@ export const AllTriangles = {
 ### web ページでの表示
 
 storybook 上に△で埋め尽くした状態の story が表示されるようになりました
+
 ![](attachments/Pasted%20image%2020250120214249.png)
 
 ## 2-4
