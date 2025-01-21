@@ -20,8 +20,30 @@ updated: 2025-01-21T22:13:02
 2. Semantic Queries
 3. Test IDs
 
-これに従ってテストを書きやすくする場合は、`<Square aria-label="square 0"/>` のように aria 属性からボードの番号を取得できるようにさせておくと、DOM 要素が取り出しやすくなる。
+## 今回の課題のテストを書きやすくするためには？
 
+９つの Square 要素にアクセスしやすくするために、aria 要素を以下のように振っておく。
+
+```jsx
+<Square aria-label="square 1"/>
+```
+
+こうすると、story 上で要素を取得するクエリが書きやすくなり、DOM 操作のコードの可読性が上がる。
+
+```jsx
+// 1つ目の×
+const x1 = canvas.getByLabelText('square 1');
+await userEvent.click(x1);
+
+// 1つ目のo
+const o1 = canvas.getByLabelText('square 3');
+await userEvent.click(o1);
+
+// 2つ目のx
+const x2 = canvas.getByLabelText('square 7');
+await userEvent.click(x2);
+
+```
 
 （以下、testing-library のドキュメントを AI に翻訳させた内容です。）
 
