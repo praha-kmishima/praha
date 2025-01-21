@@ -1,0 +1,74 @@
+---
+id: 20250121T22130200
+aliases: []
+tags: [review]
+created: 2025-01-21T22:13:02
+updated: 2025-01-21T22:13:02
+---
+
+## testing library の基本原則
+
+「The more your tests resemble the way your software is used, the more confidence they can give you.」
+
+> テストがソフトウェアの使用方法と似ていれば似ているほど、信頼性は高まる。
+
+テストを書きやすくするためには、ユーザーが操作する動作と同じ手順でテストスクリプトを書けるようにしておくことが大切である。
+
+[[testing-libarary]] では、テストを書きやすくする手法として以下の 3 つを挙げている：
+
+1. Queries Accessible to Everyone
+2. Semantic Queries
+3. Test IDs
+
+これに従ってテストを書きやすくする場合は、`<Square aria-label="square 0"/>` のように aria 属性からボードの番号を取得できるようにさせておくと、DOM 要素が取り出しやすくなる。
+
+
+（以下、testing-library のドキュメントを AI に翻訳させた内容です。）
+
+### Queries Accessible to Everyone
+
+1. `getByRole`: 最優先で使用すべきクエリです。
+    
+    - 例: `getByRole('button', {name: /送信/i})`
+    - ボタン、リンク、フォーム要素などほとんどの要素に使用可能
+    - `aria-label` や `aria-labelledby` 属性を活用して要素を特定
+    
+2. `getByLabelText`: フォームフィールドに最適
+    
+    - 例: `getByLabelText('ユーザー名')`
+    - ラベルとフォーム要素の関連付けを確認できる
+    
+3. `getByPlaceholderText`: プレースホルダーテキストでの検索
+    
+    - 例: `getByPlaceholderText('メールアドレスを入力')`
+    - ラベルがない場合の代替手段として使用
+    
+4. `getByText`: 非インタラクティブ要素の検索に使用
+    
+    - 例: `getByText('ようこそ')`
+    - 段落、見出し、スパンなどのテキストコンテンツを持つ要素に使用
+    
+5. `getByDisplayValue`: フォーム要素の現在の値で検索
+    
+    - 例: `getByDisplayValue('John Doe')`
+    - 入力済みのフォームをテストする際に有用
+
+### Semantic Queries
+
+1. `getByAltText`: 画像や入力要素の代替テキストで検索
+    
+    - 例: `getByAltText('プロフィール画像')`
+    
+2. `getByTitle`: title 属性で要素を検索
+    
+    - 例: `getByTitle('詳細情報')`
+    - ただし、スクリーンリーダーでの読み上げが一貫していないため、優先度は低い
+    
+
+### Test IDs
+
+1. `getByTestId`: 最後の手段として使用
+    
+    - 例: `getByTestId('submit-button')`
+    - `data-testid` 属性を要素に追加して使用
+    - 他の方法で要素を特定できない場合にのみ使用

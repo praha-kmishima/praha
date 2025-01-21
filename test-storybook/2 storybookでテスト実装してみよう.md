@@ -8,7 +8,7 @@ updated: 2025-01-20T21:39:00
 
 ## 2-1 storybook のインストール
 
-`npx storybook@latest init`
+`npx storybook@latest init`でインストールされて、localhostにページが立ち上がったことを確認
 
 ## 2-2 story の作成
 
@@ -110,7 +110,7 @@ export default preview;
 
 ### story の実装
 
-Board に渡す引数の squares を全て△にして、`args` で設定しました
+Board に渡す squares を全て配列の△にして、`args` で設定しました
 
 ```tsx
 import Board from "./Board";
@@ -147,7 +147,7 @@ play function 機能を使うにあたって、下記ライブラリを新しく
 `npm install @storybook/testing-library`
 `npm install @storybook/jest`
 
-### play
+### 実際にゲームするplay機能を実装したstory
 
 ```jsx
 import  Game  from './Game';
