@@ -8,7 +8,7 @@ updated: 2025-01-20T21:39:00
 
 ## 2-1 storybook のインストール
 
-`npx storybook@latest init`でインストールされて、localhostにページが立ち上がったことを確認
+`npx storybook@latest init` でインストールされて、localhost にページが立ち上がったことを確認
 
 ## 2-2 story の作成
 
@@ -138,7 +138,7 @@ storybook 上に△で埋め尽くした状態の story が表示されるよう
 
 ![](attachments/Pasted%20image%2020250120214249.png)
 
-## 2-4
+## 2-4 play function を使ってインタラクションのテストを追加する
 
 ### 関連パッケージのインストール
 
@@ -147,7 +147,7 @@ play function 機能を使うにあたって、下記ライブラリを新しく
 `npm install @storybook/testing-library`
 `npm install @storybook/jest`
 
-### 実際にゲームするplay機能を実装したstory
+### 実際にゲームする play 機能を実装した story
 
 ```jsx
 import  Game  from './Game';
