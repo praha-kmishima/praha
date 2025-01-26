@@ -4,7 +4,12 @@ aliases: []
 tags: [review]
 created: 2025-01-21T22:13:02
 updated: 2025-01-21T22:13:02
+sr-due: 2025-01-25
+sr-interval: 3
+sr-ease: 250
 ---
+
+← [3-1 storybookのメリットとデメリット](3-1%20storybookのメリットとデメリット.md) | 
 
 ## testing library の基本原則
 
@@ -12,9 +17,7 @@ updated: 2025-01-21T22:13:02
 
 > テストがソフトウェアの使用方法と似ていれば似ているほど、信頼性は高まる。
 
-テストを書きやすくするためには、ユーザーが操作する動作と同じ手順でテストスクリプトを書けるようにしておくことが大切である。
-
-[[testing-libarary]] では、テストを書きやすくする手法として以下の 3 つを挙げている：
+testing-libarary では、テストを書きやすくする手法として以下の 3 つが挙げられている：
 
 1. Queries Accessible to Everyone
 2. Semantic Queries
@@ -45,7 +48,11 @@ await userEvent.click(x2);
 
 ```
 
-（以下、testing-library のドキュメントを AI に翻訳させた内容です。）
+## testing-library のドキュメント
+
+AI に翻訳させています。
+
+testing-library を活用するためには、id 属性や aria-label などを使って各要素が取得しやすいコンポーネントを実装することが大事なようです。
 
 ### Queries Accessible to Everyone
 

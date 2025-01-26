@@ -1,13 +1,12 @@
 ---
 id: 20250115T22243939
 aliases: 
-tags:
-  - review
+tags: []
 created: 2025-01-15T22:24:39
 updated: 2025-01-15T22:24
-sr-due: 2025-01-21
-sr-interval: 3
-sr-ease: 250
+sr-due: 2025-01-24
+sr-interval: 2
+sr-ease: 230
 ---
 確認したコード
 [svelte/packages/svelte/tests/store/test.ts at main · sveltejs/svelte · GitHub](https://github.com/sveltejs/svelte/blob/main/packages/svelte/tests/store/test.ts)

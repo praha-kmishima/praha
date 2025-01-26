@@ -5,8 +5,8 @@ tags:
   - review
 created: 2025-01-14T22:46:29
 updated: 2025-01-15T22:02
-sr-due: 2025-01-21
-sr-interval: 3
+sr-due: 2025-01-30
+sr-interval: 8
 sr-ease: 250
 ---
 

@@ -4,21 +4,25 @@ aliases: []
 tags: [review]
 created: 2025-01-20T21:39:00
 updated: 2025-01-20T21:39:00
+sr-due: 2025-01-25
+sr-interval: 3
+sr-ease: 250
 ---
+← [1 reactチュートリアルのtictactoeを実装しよう](1%20reactチュートリアルのtictactoeを実装しよう.md)  | [3-1 storybookのメリットとデメリット](3-1%20storybookのメリットとデメリット.md) →
 
 ## 2-1 storybook のインストール
 
-`npx storybook@latest init` でインストールされて、localhost にページが立ち上がったことを確認
+`npx storybook@latest init` でインストールして、localhost に storybook のページが立ち上がったことを確認しました。
 
 ## 2-2 story の作成
 
-各コンポーネントの story を作成しました
+各コンポーネントの story を作成しました。
 
 なお、チュートリアル実施状態では各コンポーネントが１つの app.js のファイルの中にまとめられていたため、
 - `Board.jsx`
 - `Square.jsx`
 - `Game.jsx`
-にそれぞれファイルを切り出した後、各コンポーネントに対する story を作成しています
+にそれぞれファイルを切り出した後、各コンポーネントの story を作成しています
 
 ### Board コンポーネントの story
 
@@ -86,7 +90,7 @@ export const WithO = {
 
 ### preview.js に tictactoe の css を適用
 
-tictactoe のクラスに適用していた `styles.css` が、storybook が生成する web ページ上に反映されていないため、 `preview.js` に変更を加えました
+tictactoe のクラスに適用していた `styles.css` が、storybook が生成する web ページ上に反映されていないため、 `preview.js` に変更を加えました。
 
 ```jsx
 /** @type { import('@storybook/react').Preview } */
@@ -142,7 +146,7 @@ storybook 上に△で埋め尽くした状態の story が表示されるよう
 
 ### 関連パッケージのインストール
 
-play function 機能を使うにあたって、下記ライブラリを新しく追加しました
+play function 機能を使うにあたって、下記ライブラリを新しく追加しました。
 
 `npm install @storybook/testing-library`
 `npm install @storybook/jest`
@@ -202,8 +206,8 @@ export const WinningScenario = {
 
 ### 動作確認
 
-ゲーム開始から終了までの動作が実行されています
+ゲーム開始から終了までの動作テストが実行されるようになりました。
 
-（userEvent.click がされるたびに盤面の位置が動いているが、おそらく css のスタイリングの問題だと思われる）
+（userEvent.click がされるたびに盤面の位置が動いているが、おそらく css のスタイリングの問題）
 
 ![Gyazo](https://gyazo.com/665b0d22c790cd8118c472df8568732a.gif)

@@ -4,8 +4,11 @@ aliases: []
 tags: [review]
 created: 2025-01-21T22:00:26
 updated: 2025-01-21T22:00:26
+sr-due: 2025-01-25
+sr-interval: 3
+sr-ease: 250
 ---
-
+← [2 storybookでテスト実装してみよう](2%20storybookでテスト実装してみよう.md) | [3-2 play function機能をかきやすくするためには](3-2%20play%20function機能をかきやすくするためには.md) →
 ## メリット
 
 - 特定の状態を持たせた状態での各画面の挙動を確認できる

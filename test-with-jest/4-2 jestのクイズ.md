@@ -5,8 +5,8 @@ tags:
   - review
 created: 2025-01-18T01:39:50
 updated: 2025-01-18T01:39:50
-sr-due: 2025-01-21
-sr-interval: 3
+sr-due: 2025-01-31
+sr-interval: 9
 sr-ease: 250
 ---
 ### クイズ
