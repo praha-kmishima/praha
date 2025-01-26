@@ -16,28 +16,30 @@ Github Actions を用いて、プルリク作成時に storybook をビルドし
 
 ## 1-2 Square の中身を黒色→赤色に変える
 
-[×の文字色を赤色に変える by kmishima16 · Pull Request #4 · praha-kmishima/tictactoe-chromatic · GitHub](https://github.com/praha-kmishima/tictactoe-chromatic/pull/4)
-
 css に変更を加え、
 
 `color: red;`
 
 プルリクエストを発行すると、chromatic 上で前回のマージ時点とのレビューができるようになりました。
 
+[×の文字色を赤色に変える by kmishima16 · Pull Request #4](https://github.com/praha-kmishima/tictactoe-chromatic/pull/4)
+
 ![](attachments/Pasted%20image%2020250126140042.png)
 
-story で square の色が変化している差分が確認できます。
+また、story で square の色が変化している差分が確認できます。
 
 ![](attachments/Pasted%20image%2020250126140055.png)
 
 
-すべて Accept して、このプルリクはマージしました。
+レビューはすべて Accept して、このプルリクはマージしました。
 
 ![](attachments/Pasted%20image%2020250126140104.png)
 
+### UI Test
+
 chromatic では、この前回との UI の差分を比較することを UI Test と呼ぶらしいです。
 
-CI の実行時間が 3 分ぐらいかかることと、アクセス制限などセキュリティ面での運用を考える必要はありそうですが、とても便利だと思いました。
+CI の実行時間が 3 分ぐらいかかることと、アクセス制限などセキュリティ面での運用を考える必要はありそうですが、とても有用かと思います。
 
 ## 3x3 ではなく 4x3 の Board を作成してみる
 
@@ -71,27 +73,27 @@ UI テストに失敗があった通知がでています。
 
 ### (検証) プルリクが reject されると、最新の snapshot はどの時点になるのか？
 
-プルリクを close したあと、再度×の文字色を黒に戻したときに、story が更新されていないことを確認してみる。
+プルリクを close したあと、再度×の文字色を黒に戻したときに、story が更新されていないことを確認してみました。
 
-まず、feature ブランチで reject されたコミットを取り消すために、gitlab のコミットグラフ上で Revert commit する。
+まず、feature ブランチで reject されたコミットを取り消すために、gitlab のコミットグラフ上で Revert commit しました。
 
-これで 3×4 の盤面変更コードが取り消される。
+これで 3×4 の盤面変更コードを取り消すコミットが追加されます。
 
 ![](attachments/Pasted%20image%2020250126140626.png)
 
-次に、`style.css` を編集して、ボードの文字色を黒色に戻す。
+次に、`style.css` を編集して、ボードの文字色を黒色に戻しました。
 
-その後プルリクを発行して、Chromatic 上のスクリーンショットを確認してみる。
+その後プルリクを発行して、Chromatic 上のスクリーンショットを確認してみます。
 
 ![](attachments/Pasted%20image%2020250126140726.png)
 
-reject したプルリクエスト分の更新は取り消されているで、最後に Accept されたコードベースのキャプチャが最新版となっているようだった。
+reject したプルリクエスト分の更新は取り消されているで、最後に Accept されたコードベースのキャプチャが最新版となっているようです。
 
 ![](attachments/Pasted%20image%2020250126140836.png)
 
-また、過去のビルド一覧を見てみると、Reject されたビルドも確認することができるようだった。
+また、過去のビルド一覧を見てみると、Reject されたビルドも確認することができるようです。
 
-ステータスごとにビルドが色付けされている。
+以下のステータスごとにビルドが色付けされているようです。
 - 緑：レビュー済みビルド
 - 赤：Reject されたビルド
 - 黄：レビューされなかったけどマージされたビルド
@@ -100,7 +102,7 @@ reject したプルリクエスト分の更新は取り消されているで、�
 
 ### Baselines
 
-ブランチや差分比較の概念・進め方については [Branches and baselines • Chromatic docs](https://www.chromatic.com/docs/branching-and-baselines/) で Chromatic 公式が説明しているようだ。
+ブランチや差分比較の概念・進め方については [Branches and baselines • Chromatic docs](https://www.chromatic.com/docs/branching-and-baselines/) で Chromatic 公式が解説記事を出しているようでした。
 
 ![](attachments/Pasted%20image%2020250126141114.png)
 
