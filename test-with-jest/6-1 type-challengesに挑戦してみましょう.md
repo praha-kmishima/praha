@@ -1,8 +1,7 @@
 ---
 id: 20250115T22252790
 aliases: 
-tags:
-  - review
+tags: []
 created: 2025-01-15T22:25:27
 updated: 2025-01-15T22:25
 sr-due: 2025-01-30
