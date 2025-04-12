@@ -90,7 +90,7 @@ WHERE
     order_count = (SELECT max_order_count FROM max_count);
 ```
 
-![[Pasted image 20250406195207.png]]
+![[../images/Pasted image 20250406195207.png]]
 
 ### 4 本目 JOIN した後にかけ算
 
@@ -112,7 +112,7 @@ ORDER BY
     proceeds DESC;
 ```
 
-![[Pasted image 20250406195612.png]]
+![[../images/Pasted image 20250406195612.png]]
 
 ### 5 本目 DATE_FORMAT したカラムで group_by
 
@@ -137,7 +137,7 @@ ORDER BY
     year ASC;
 ```
 
-![[Pasted image 20250406195859.png]]
+![[../images/Pasted image 20250406195859.png]]
 
 高難易度版
 - UNION で各月のテーブルを作る
@@ -193,7 +193,7 @@ ORDER BY
     m.month ASC;
 ```
 
-![[Pasted image 20250406200249.png]]
+![[../images/Pasted image 20250406200249.png]]
 
 ### 6 本目 カラムの追加・UPDATE
 
@@ -208,7 +208,7 @@ SET junior = TRUE
 WHERE birth_date > '1990-01-01';
 ```
 
-![[Pasted image 20250406200644.png]]
+![[../images/Pasted image 20250406200644.png]]
 
 ### 7 本目 カラムの追加・UPDATE(サブクエリ有)
 
@@ -228,7 +228,7 @@ WHERE shipper_id IN (
 );
 ```
 
-![[Pasted image 20250406215232.png]]
+![[../images/Pasted image 20250406215232.png]]
 
 ### 8 本目 with 句で複雑なクエリを処理する
 
@@ -274,7 +274,7 @@ ORDER BY
     employee_id;
 ```
 
-![[Pasted image 20250406215958.png]]
+![[../images/Pasted image 20250406215958.png]]
 
 ### 9 本目 NULL を含むクエリ
 
@@ -331,10 +331,10 @@ LEFT JOIN
 
 INNER JOIN
 - 削除された従業員の
-![[Pasted image 20250406221029.png]]
+![[../images/Pasted image 20250406221029.png]]
 
 LEFT JOIN
-![[Pasted image 20250406221550.png]]
+![[../images/Pasted image 20250406221550.png]]
 
 ## 課題 2
 
