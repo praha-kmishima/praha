@@ -175,15 +175,15 @@ GPT POSTリクエスト
 
 ### `target="_blank"`の挙動
 
-target="_blank"で新しいタブを開くと、開かれたページはwindow.openerというJavaScriptのグローバル変数を通じて、リンク元ページの情報を参照したり、操作したりできる可能性があります。
+`target="_blank"`で新しいタブを開くと、`rel=noreferrer`が指定されていない場合、開かれたページは`window.opener`というJavaScriptのグローバル変数を通じて、リンク元ページの情報を参照したり、操作したりできる可能性があります。
 
-![](image-1.png)
+![window.opener を使って元ウィンドウの情報が取得できるかどうかの実験 – ラボラジアン](image-1.png)
 
-例えば、悪意のあるサイトに誘導された場合、新しいタブで開かれたサイトがwindow.opener.locationを変更して、元のページをフィッシングサイトや偽物の入力フォームにページが置き換わる、といった問題があり得ます。
+例えば、悪意のあるサイトに誘導された場合、新しいタブで開かれたサイトが`window.opener.location`を変更して、元のページをフィッシングサイトや偽物の入力フォームにページが置き換わる、といった問題があり得ます。
 
 ### rel=noreferrerの挙動
 
-rel="noreferrer"は、新しいタブを開く際に、リンク元のURL情報を送信しないようにします。これにより、第三者によるリンク元ページの操作を防げるようになります。
+rel="noreferrer"が付与されたaタグは、新しいタブを開く際に、リンク元のURL情報を送信しないようにします。これにより、第三者によるリンク元ページの操作を防げるようになります。
 
 ### 参考
 
@@ -194,7 +194,11 @@ rel="noreferrer"は、新しいタブを開く際に、リンク元のURL情報�
 
 > 先輩エンジニアに「同じオリジンの時はrefererの情報を全部送って、別オリジンの時は、オリジン情報だけをrefererとして送信するように、HTTPヘッダを追加しておいてもらえる？」と頼まれました。HTTPヘッダーには、どんな値を追加する必要があるでしょうか？
 
-回答：HTTPヘッダーに`Referrer-Policy: strict-origin-when-cross-origin`を追加する必要があります。
+回答：HTTPヘッダーに`Referrer-Policy: strict-origin-when-cross-origin`または、`origin-when-cross-origin`を追加する必要があります。
+
+※：strictをつけると、HTTPSからHTTPに遷移する場合はリファラ情報が付与されなくなります。
+
+※：HTTPヘッダー、metaタグ、aタグなどにリファラポリシーが指定されていなかった場合、ブラウザはデフォルトでstrictを付与します。
 
 ### `Referrer-Policy`
 
@@ -202,9 +206,13 @@ Referrer-Policyは、ブラウザがリクエストを送る際に、どの程�
 
 リファラ情報とは、どのページからリクエストが送られてきたかを示す情報で、通常はURL全体が含まれます。
 
+指定できる値について：[MDN - Referrer-Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
+
 ### `Referrer-Policy: strict-origin-when-cross-origin`
 
 このようにヘッダーを設定すると、以下の挙動になる
+
+
 
 - 同じオリジン（same-origin）へのリクエスト：
   - `https://example.com/page1` から `https://example.com/page2`
@@ -233,7 +241,7 @@ REST（REpresentational State Transfer）の４原則として、以下が挙げ
 - 接続性
 - 統一したインターフェース
 
-RESTful APIについて、「統一したインターフェース」とはどんな意味を指すのでしょうか。適切ものを選んでください。
+RESTful APIについて、REST原則にある「統一したインターフェース」とはどんな意味を指すのでしょうか。適切ものを選んでください。
 
 1. やり取りされる情報自体で処理が完結し、サーバがクライアントのセッションなどの状態を管理しない。
 2. 情報の操作（取得、作成、更新、削除）に、HTTPメソッド（GET, POST, PUT, DELETEなど）を用いる。
@@ -287,32 +295,43 @@ Xのフォロー関係の破棄はPUT?PATCH?DELETE?
 お気に入りリストからの削除はPUT?PATCH?DELETE?
 どこまでHTTPメソッドを本来の定義に沿って使うべきか、チームで話し合ってみてください。参考としてSlackやXなど有名サービスのAPIのドキュメントを読んでみると良いかもしれません！
 
-調べてみるとよいこと
+### 代表的なメソッドとその役割
 
-- HTTPメソッド(とくに、PUT,PATCH,DELETE,POST)
-- 安全性、冪等性
-- RESTfulとは REST原則とは
-- リソース、関係性、ユースケースのモデリングとREST
-- RPCスタイル いつ、どのようにベースラインのRESTfulパターンから逸脱するか
+HTTPメソッドの原理としては、以下となっている。
 
->設計の出発点は、常に冪等性と安全性というHTTPの基本原則に置くべきである。次に、ドメインの概念をリソースとして表現するリソースモデリングの技術を習得することが不可欠である。これが、適切なHTTPメソッド（GET, PUT, PATCH, DELETE）を選択するための土台となる。
+- GET：リソースの取得
+- POST：新しいリソースの作成
+- PUT：既存リソースの完全な更新（上書き）
+- PATCH：既存リソースの部分的な更新
+- DELETE：リソースの削除
 
->しかし、最も優れたアプローチは、RESTfulの原則に深く根ざしつつも、現実世界の複雑性を受け入れる実用主義的なアプローチである。明確性と安全性が最優先される複雑なビジネスプロセスに対しては、統制されたRPCスタイルの逸脱（アクションを名前に含むURIへのPOST）をためらわない勇気が必要である。これは原則の放棄ではなく、より高いレベルでの原則（明確性、安全性）を優先するための、成熟した判断である。
+![フューチャー WEB API設計ガイドライン](image-2.png)
 
->優れたAPI設計哲学を育むことは、一夜にしてならず、継続的な学習と実践のプロセスである。本レポートで議論した原則を意思決定の基盤とし、推奨された文献を通じて知識を深めることで、あらゆるエンジニアは、メソッド選択の不確かさから脱却し、自信に満ちた専門家レベルのAPI設計へと到達することができるだろう。
 
-参考にするとよい公開API
+### Xのユースケース
 
-- フューチャー
-- X API
+- Xのフォロー関係の破棄	DELETE
+- 取引の取り消し POST (または PATCH)
+- お気に入りリストからの削除 DELETE
 
-### TODO
+理由は、関係を削除する行為ならDELETE、関係を変更または追加するならPOST。
 
-- これの答えを持っておく
-  - Xのフォロー関係の破棄はPUT?PATCH?DELETE?取引の取り消しはPUT?PATCH?DELETE?お気に入りリストからの削除はPUT?PATCH?DELETE?
-- RESTfulってなに？
-- リソースとHTTPメソッドとWEBAPIの関連性は？何を意識しないといけない？
-- RPCってなに？実用主義って何？登録も更新も全部POSTでよい、という風潮があるのはなぜ
-- デジタル庁は`PATCH,PUT /user/{id}`みたいなのを推奨しているらしい　みたいな感じでslackに投げれる粒度のメモを作っておく
+関係の変更について、より厳密に考えるなら、PUT:「URIの対象のアイテムをまるごと変更する」で、PATCH：「URIの対象のアイテムのプロパティの一部を変更する」というイメージ？
 
-https://gemini.google.com/app/0400ad232c29edc3?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all
+### PUTとPATCHの違い
+
+[PUTとPATCHの違いを説明できないエンジニアがいるらしい](https://qiita.com/Sicut_study/items/45372a38592fbbbc051a)
+
+使い分けについて厳密に話したいなら、POSTとPUT, PUTとPATCHの違いは理解した上で議論したほうがよさそう
+
+### より細かいガイドライン
+
+[フューチャー WEB API設計ガイドライン](https://future-architect.github.io/arch-guidelines/documents/forWebAPI/web_api_guidelines.html#%E5%88%A9%E7%94%A8%E6%96%B9%E9%87%9D)
+
+> バックエンドがREST志向ではなく、RPCとして動作させた方が適切なケースがある。例えば以下のような条件がある。
+
+RPC（GraphQL）なら、変更系は全部POSTでよい。みたいなことにも言及されている
+
+[Zalando RESTful API と イベントスキーマのガイドライン](https://restful-api-guidelines-ja.netlify.app/)
+
+分量多い。良い文献らしい
