@@ -335,3 +335,9 @@ RPC（GraphQL）なら、変更系は全部POSTでよい。みたいなことに
 [Zalando RESTful API と イベントスキーマのガイドライン](https://restful-api-guidelines-ja.netlify.app/)
 
 分量多い。良い文献らしい
+
+### QUERYメソッドというHTTPメソッド追加が提案されているらしい
+
+新しいHTTPメソッドとして、QUERYメソッドの仕様が検討されている。もし仕様策定が進むと、POSTではなくQUERYを用いる方が適切となる。
+
+[新しいHTTPメソッド、QUERYメソッドの仕様 - ASnoKaze blog](https://asnokaze.hatenablog.com/entry/2021/11/09/231858)
