@@ -10,16 +10,16 @@
 
 ## 1-1 ヘッダーの意味と役割
 
-| ヘッダー | 意味 | 役割 | 利用例 |
+| ヘッダー | 利用例 | 意味 | 役割  |
 | :--- | :--- | :--- | :--- |
-| Host | リクエスト送信先のサーバーのホスト名とポート番号 | どのサーバーのどのポートにリクエストが送信されるかを示す | `Host: www.example.com` |
-| Content-Type | 送信するリソースのメディア種別（MIMEタイプ） | クライアントとサーバー間で送受信されるデータの種類を伝える | `Content-Type: application/json` |
-| User-Agent | リクエストを送信したクライアントのソフトウェア情報 | サーバーがクライアントのブラウザやOSを識別し、コンテンツを最適化するために利用する | `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...` |
-| Accept | クライアントが処理できるコンテンツタイプ | クライアントが受け入れ可能なデータ形式をサーバーに伝え、適切な形式でレスポンスを受け取る | `Accept: text/html, application/json` |
-| Referer | 現在のリクエストを発生させた元のページのURL | サーバーがユーザーの遷移元を分析したり、ログに記録したりするために使用する | `Referer: https://www.google.com/` |
-| Accept-Encoding | クライアントが理解できるコンテンツの圧縮方式 | サーバーに受け入れ可能な圧縮形式を伝え、通信データを圧縮して転送速度を向上させる | `Accept-Encoding: gzip, deflate, br` |
-| Authorization | クライアントの認証情報 | 保護されたリソースへのアクセスを許可するために、サーバーに認証情報（トークンなど）を送信する | `Authorization: Bearer <token>` |
-| Location | リダイレクト先のURL | サーバーがクライアントに対して、別のURLにアクセスするように指示する（リダイレクト） | `Location: /new-page.html` |
+| Host | `Host: www.example.com` | 送信先サーバーのホスト名とポート番号 | どのサーバーのどのポートにリクエストが送信されるか  |
+| Content-Type | `Content-Type: application/json` |  送信するリソースの種別（MIMEタイプ） | 送受信されるデータの種類を伝える |
+| User-Agent | `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...` | クライアントのソフトウェア情報 | サーバーがクライアントのブラウザやOSを識別し、コンテンツを最適化するために利用される  |
+| Accept | `Accept: text/html, application/json` | クライアントが処理できるコンテンツタイプ | クライアントが受け入れ可能なレスポンスを受け取るため  |
+| Referer | `Referer: https://www.google.com/` | 遷移元のページのURL | サーバーがユーザーの遷移元を分析したり、ログに記録したりするために使用する  |
+| Accept-Encoding | `Accept-Encoding: gzip, deflate, br` | クライアントが理解できる圧縮方式 | サーバーが通信データを圧縮して転送速度を向上させるため  |
+| Authorization | `Authorization: Bearer <token>` | クライアントの認証情報 | 保護されたリソースへのアクセスを許可するために、サーバーに認証情報（トークンなど）を送信する  |
+| Location | `Location: /new-page.html` | リダイレクト先のURL | サーバーがクライアントに対して、別のURLにアクセスするように指示する（リダイレクト）  |
 
 ### レスポンス、リクエストヘッダー（chatgpt,notion）
 
@@ -27,7 +27,7 @@ ChatGPTとNotionについて、GETとPOST時のレスポンス、リクエスト
 
 たくさんHTTPヘッダーがあるんだなあ、となった。
 
-GPT GETレスポンス
+**ChatGPT レスポンスヘッダ GET**
 
 ```json
 {
@@ -46,99 +46,7 @@ GPT GETレスポンス
 }
 ```
 
-notion GETレスポンス
-
-```json
-{
-   "accept-ranges": "bytes",
-    "alt-svc": "h3=\":443\"; ma=86400",
-    "cache-control": "no-cache",
-    "cf-cache-status": "DYNAMIC",
-    "cf-ray": "972839c0dfd119...",
-    "content-encoding": "gzip",
-    "content-security-policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://gist.github.com https://apis.google.com https://cdn.amplitude.com https://api.am ...",
-    "content-type": "text/html; charset=utf-8",
-    "date": "Thu, 21 Aug 2025 06:55:34 GMT",
-    "document-policy": "include-js-call-stacks-in-crash-report",
-    "etag": "\"833d723e0fca292879423beedc6a89\"",
-    "expires": "0",
-    "last-modified": "Thu, 21 Aug 2025 06:05:06 GMT",
-    "pragma": "no-cache",
-    "referrer-policy": "strict-origin-when-cross-origin",
-    "server": "cloudflare",
-    "server-timing": "r;dur=899",
-    "strict-transport-security": "max-age=31536000; includeSubDomains; preload"
-}
-```
-
-GPT POSTレスポンス
-
-```json
-{
-    "access-control-allow-credentials": "true",
-    "access-control-allow-origin": "https://chatgpt.com",
-    "cf-cache-status": "DYNAMIC",
-    "cf-ray": "972839c0dfd119...",
-    "content-encoding": "br",
-    "content-type": "application/json",
-    "cross-origin-opener-policy": "same-origin-allow-popups",
-    "date": "Thu, 21 Aug 2025 06:24:13 GMT",
-    "nel": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
-    "referrer-policy": "strict-origin-when-cross-origin",
-    "report-to": "{\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=mSVRr0rXQrUHOP%2BJi%2F948ddoW...\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
-    "server": "cloudflare",
-    "set-cookie": "__cf_bm=8Bah.fdmYo9s2...path=/; expires=Thu, 21-Aug-25 07:34:17 GMT; domain=.chatgpt.com; HttpOnly; Secure; SameSite=None",
-    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-    "vary": "Origin",
-    "x-build": "d38227785ef4-convo" 
-}
-```
-
-GPT GETリクエスト
-
-```json
-{
-   "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "accept-encoding": "gzip, deflate, br, zstd",
-    "accept-language": "ja,en-US;q=0.9,en;q=0.8",
-    "cache-control": "max-age=0",
-    "cookie": "_Host-next-auth.csrf-token=3d3...",
-    "priority": "u=0,i",
-    "referer": "https://chatgpt.com/",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin",
-    "upgrade-insecure-requests": "1",
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-}
-```
-
-notion GETリクエスト
-
-```json
-{
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "accept-encoding": "gzip, deflate, br, zstd",
-    "accept-language": "ja,en-US;q=0.9,en;q=0.8",
-    "cache-control": "max-age=0",
-    "cookie": "notion_browser_id=dd...",
-    "priority": "u=0,i",
-    "referer": "https://www.notion.com/",
-    "sec-ch-ua": "\"Not;A=Brand\";v=\"8\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"138\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "document",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "upgrade-insecure-requests": "1",
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" 
-}
-```
-
-GPT POSTリクエスト
+**ChatGPT リクエストヘッダ GET**
 
 ```json
 {
@@ -165,54 +73,156 @@ GPT POSTリクエスト
 }
 ```
 
+**ChatGPT レスポンスヘッダ POST**
+
+```json
+{
+    "access-control-allow-credentials": "true",
+    "access-control-allow-origin": "https://chatgpt.com",
+    "cf-cache-status": "DYNAMIC",
+    "cf-ray": "972839c0dfd119...",
+    "content-encoding": "br",
+    "content-type": "application/json",
+    "cross-origin-opener-policy": "same-origin-allow-popups",
+    "date": "Thu, 21 Aug 2025 06:24:13 GMT",
+    "nel": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "report-to": "{\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=mSVRr0rXQrUHOP%2BJi%2F948ddoW...\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+    "server": "cloudflare",
+    "set-cookie": "__cf_bm=8Bah.fdmYo9s2...path=/; expires=Thu, 21-Aug-25 07:34:17 GMT; domain=.chatgpt.com; HttpOnly; Secure; SameSite=None",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "vary": "Origin",
+    "x-build": "d38227785ef4-convo" 
+}
+```
+
+
+**ChatGPT リクエストヘッダ GET**
+
+```json
+{
+   "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "ja,en-US;q=0.9,en;q=0.8",
+    "cache-control": "max-age=0",
+    "cookie": "_Host-next-auth.csrf-token=3d3...",
+    "priority": "u=0,i",
+    "referer": "https://chatgpt.com/",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "upgrade-insecure-requests": "1",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+}
+```
+
+**notion レスポンスヘッダ GET**
+
+```json
+{
+   "accept-ranges": "bytes",
+    "alt-svc": "h3=\":443\"; ma=86400",
+    "cache-control": "no-cache",
+    "cf-cache-status": "DYNAMIC",
+    "cf-ray": "972839c0dfd119...",
+    "content-encoding": "gzip",
+    "content-security-policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://gist.github.com https://apis.google.com https://cdn.amplitude.com https://api.am ...",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Thu, 21 Aug 2025 06:55:34 GMT",
+    "document-policy": "include-js-call-stacks-in-crash-report",
+    "etag": "\"833d723e0fca292879423beedc6a89\"",
+    "expires": "0",
+    "last-modified": "Thu, 21 Aug 2025 06:05:06 GMT",
+    "pragma": "no-cache",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "server": "cloudflare",
+    "server-timing": "r;dur=899",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload"
+}
+```
+
+**notion リクエストヘッダ GET**
+
+```json
+{
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "ja,en-US;q=0.9,en;q=0.8",
+    "cache-control": "max-age=0",
+    "cookie": "notion_browser_id=dd...",
+    "priority": "u=0,i",
+    "referer": "https://www.notion.com/",
+    "sec-ch-ua": "\"Not;A=Brand\";v=\"8\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"138\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "upgrade-insecure-requests": "1",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" 
+}
+```
+
+
 
 
 ## 1-2 aタグにrel=noreferrerを設定しなかった場合に起きうる問題
 
 > aタグにtarget="_blank"を設定したところ、先輩エンジニアから「ちゃんとrel=noreferrerを設定した？」と聞かれました。なぜそのような設定が必要なのでしょうか？rel=noreferrerを設定しなかった場合に起きうる問題を調べて、説明して下さい。
 
-セキュリティとパフォーマンスの観点
 
-### `target="_blank"`の挙動
+### セキュリティリスク
 
-`target="_blank"`で新しいタブを開くと、`rel=noreferrer`が指定されていない場合、開かれたページは`window.opener`というJavaScriptのグローバル変数を通じて、リンク元ページの情報を参照したり、操作したりできる可能性があります。
+aタグに`target="_blank"`を設定すると新しいタブでリンク先が開くことができるが、rel=noreferrerを使用しない場合はセキュリティリスクがある。
 
-![window.opener を使って元ウィンドウの情報が取得できるかどうかの実験 – ラボラジアン](image-1.png)
+例えば外部リンクのページBは、遷移元のページAを`window.opener`オブジェクトとして参照することができる。ページBが悪意あるサイトだった場合、`window.opener.location = <危険なURL>`のようにページAのコンテンツの書き換えが可能になる。
 
-例えば、悪意のあるサイトに誘導された場合、新しいタブで開かれたサイトが`window.opener.location`を変更して、元のページをフィッシングサイトや偽物の入力フォームにページが置き換わる、といった問題があり得ます。
+この脆弱性は、Tabnabbing（タブナビング）攻撃と呼ばれているらしい。
 
-### rel=noreferrerの挙動
+### 対策方法
 
-rel="noreferrer"が付与されたaタグは、新しいタブを開く際に、リンク元のURL情報を送信しないようにします。これにより、第三者によるリンク元ページの操作を防げるようになります。
+aタグのrel属性に`noreferrer`を指定すると、window.opener経由での参照ができなくなり、また参照元のリンク情報を渡さないようにできる。
 
-### 参考
+```html
+<a href="xxxx.com" target="_blank" rel="noopener noreferrer">リンク名</a>
+```
 
-- [window.opener を使って元ウィンドウの情報が取得できるかどうかの実験 – ラボラジアン](https://laboradian.com/test-window-opener)
-- [Window: opener プロパティ](https://developer.mozilla.org/ja/docs/Web/API/Window/opener )
+ただし、最近はセキュリティ対策が進み、ブラウザはリンク先を自動でnoreferrerを付与して開くようになっているらしい。
 
-## 1-3 HTTPヘッダーの設計
+[window.opener を使って元ウィンドウの情報が取得できるかどうかの実験 – ラボラジアン](https://laboradian.com/test-window-opener)
+
+> ![](image-1.png)
+
+[Tabnabbing](https://chikuwamarux.hatenablog.com/entry/20220827/1661560669 )
+
+>また、最近のChrome, Edge, FireFoxなどでは、リンクを自動的にnoopenerとして開くようになっているようです。
+>[Feature: Anchor target=_blank implies rel=noopener by default](https://chromestatus.com/feature/6140064063029248)
+
+
+
+## 1-3 refererのヘッダ
 
 > 先輩エンジニアに「同じオリジンの時はrefererの情報を全部送って、別オリジンの時は、オリジン情報だけをrefererとして送信するように、HTTPヘッダを追加しておいてもらえる？」と頼まれました。HTTPヘッダーには、どんな値を追加する必要があるでしょうか？
 
-回答：HTTPヘッダーに`Referrer-Policy: strict-origin-when-cross-origin`または、`origin-when-cross-origin`を追加する必要があります。
-
-※：strictをつけると、HTTPSからHTTPに遷移する場合はリファラ情報が付与されなくなります。
-
-※：HTTPヘッダー、metaタグ、aタグなどにリファラポリシーが指定されていなかった場合、ブラウザはデフォルトでstrictを付与します。
+HTTPヘッダーのReferrer-Policyに`origin-when-cross-origin`または`strict-origin-when-cross-origin`を追加する。
 
 ### `Referrer-Policy`
 
-Referrer-Policyは、ブラウザがリクエストを送る際に、どの程度のリファラ情報を送るかを制御するためのHTTPヘッダー。
+Referrer-Policyは、ブラウザがリクエストを送る際に、どの程度のリファラ情報を送るかを制御するためのHTTPヘッダー
 
-リファラ情報とは、どのページからリクエストが送られてきたかを示す情報で、通常はURL全体が含まれます。
+リファラポリシーに指定できる値：[MDN - Referrer-Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
 
-指定できる値について：[MDN - Referrer-Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
+なお、Chromeはこのヘッダが指定していなければ、デフォルトで`strict-origin-when-cross-origin`になる。
 
-### `Referrer-Policy: strict-origin-when-cross-origin`
-
-このようにヘッダーを設定すると、以下の挙動になる
+[Chrome の新しいデフォルトのReferrer-Policy - strict-origin-when-cross-origin](https://developer.chrome.com/blog/referrer-policy-new-chrome-default?hl=ja)
 
 
+### 動作挙動
+
+`strict-origin-when-cross-origin`を設定すると、以下の挙動になる
 
 - 同じオリジン（same-origin）へのリクエスト：
   - `https://example.com/page1` から `https://example.com/page2`
@@ -235,13 +245,9 @@ HTTPメソッドにおける「冪等性」と「安全性」について、最�
 ### Q2:RESTの原則
 
 REST（REpresentational State Transfer）の４原則として、以下が挙げられています：
+アドレス可能性、ステートレス性、接続性、統一したインターフェース
 
-- アドレス可能性
-- ステートレス性
-- 接続性
-- 統一したインターフェース
-
-RESTful APIについて、REST原則にある「統一したインターフェース」とはどんな意味を指すのでしょうか。適切ものを選んでください。
+では、RESTful APIにおいて、REST原則の「統一したインターフェース」とはどんな意味を指すのでしょうか。適切ものを選んでください。
 
 1. やり取りされる情報自体で処理が完結し、サーバがクライアントのセッションなどの状態を管理しない。
 2. 情報の操作（取得、作成、更新、削除）に、HTTPメソッド（GET, POST, PUT, DELETEなど）を用いる。
