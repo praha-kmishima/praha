@@ -215,9 +215,9 @@ Referrer-Policyは、ブラウザがリクエストを送る際に、どの程�
 
 リファラポリシーに指定できる値：[MDN - Referrer-Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
 
-なお、Chromeはこのヘッダが指定していなければ、デフォルトで`strict-origin-when-cross-origin`になる。
+なお、Chromeはリファラポリシーが指定されていなければ、デフォルトで`strict-origin-when-cross-origin`になる。
 
-[Chrome の新しいデフォルトのReferrer-Policy - strict-origin-when-cross-origin](https://developer.chrome.com/blog/referrer-policy-new-chrome-default?hl=ja)
+※：[Chrome の新しいデフォルトのReferrer-Policy - strict-origin-when-cross-origin](https://developer.chrome.com/blog/referrer-policy-new-chrome-default?hl=ja)
 
 
 ### 動作挙動
@@ -301,49 +301,64 @@ Xのフォロー関係の破棄はPUT?PATCH?DELETE?
 お気に入りリストからの削除はPUT?PATCH?DELETE?
 どこまでHTTPメソッドを本来の定義に沿って使うべきか、チームで話し合ってみてください。参考としてSlackやXなど有名サービスのAPIのドキュメントを読んでみると良いかもしれません！
 
-### 代表的なメソッドとその役割
+### POST,PUT,PATCHの違い
 
-HTTPメソッドの原理としては、以下となっている。
+### POST
 
-- GET：リソースの取得
-- POST：新しいリソースの作成
-- PUT：既存リソースの完全な更新（上書き）
-- PATCH：既存リソースの部分的な更新
-- DELETE：リソースの削除
+- リソースを作成する
+- RESTful原則に従う場合、リソースが新規に作られるため冪等性はない
 
-![フューチャー WEB API設計ガイドライン](image-2.png)
+### PUT
+
+- リクエストボディによって、特定のリソースが作成または置き換えられる。
+- RESTful原則に従う場合、リソースの値を書き換えるため冪等性がある
+
+### PATCH
+
+- 既存リソースに新しいものを付け足す、書き換える
 
 
-### Xのユースケース
+![参考：フューチャー WEB API設計ガイドライン](image-2.png)
+
+
+### 課題のユースケース
 
 - Xのフォロー関係の破棄	DELETE
-- 取引の取り消し POST (または PATCH)
 - お気に入りリストからの削除 DELETE
+- 取引の取り消し POST/DELETE/PUT/PATCH（場合による）
 
-理由は、関係を削除する行為ならDELETE、関係を変更または追加するならPOST。
+DBのレコードを削除するような行為であればDELETEになるが、取引の取り消しのような処理はどのようにデータベース上でデータを保存・変更しているかでどのメソッドにするかも変わっていきそう。
 
-関係の変更について、より厳密に考えるなら、PUT:「URIの対象のアイテムをまるごと変更する」で、PATCH：「URIの対象のアイテムのプロパティの一部を変更する」というイメージ？
+また、APIサーバをREST指向にするか、RPC指向にするか、GraphQLにするかでHTTPメソッドの指針も変わるっぽい。PUT,PATCHを使うのはREST思考をガイドラインとしてAPIサーバを立てるときになる
 
-### PUTとPATCHの違い
+### 余談：QUERYメソッドというHTTPメソッド追加が提案中
 
-[PUTとPATCHの違いを説明できないエンジニアがいるらしい](https://qiita.com/Sicut_study/items/45372a38592fbbbc051a)
+新しいHTTPメソッドとして、QUERYメソッドを導入しませんか、という提案が検討中らしい。
 
-使い分けについて厳密に話したいなら、POSTとPUT, PUTとPATCHの違いは理解した上で議論したほうがよさそう
+URLにクエリパラメータを付けて、フィルター条件を付与した形でデータを取得するGETリクエストを送る場合があるが、QUERYメソッドはこの時にURLではなくリクエストボディにフィルタ条件を付与する形でリクエストを送る。
 
-### より細かいガイドライン
+```HTTP
+GET /api/v1/products?category=game&price_min=10000&sort_by=price_desc HTTP/1.1
+Host: example.com
+```
 
-[フューチャー WEB API設計ガイドライン](https://future-architect.github.io/arch-guidelines/documents/forWebAPI/web_api_guidelines.html#%E5%88%A9%E7%94%A8%E6%96%B9%E9%87%9D)
+```HTTP
+QUERY /api/products HTTP/1.1
+Host: example.com
+Content-Type: application/json
 
-> バックエンドがREST志向ではなく、RPCとして動作させた方が適切なケースがある。例えば以下のような条件がある。
-
-RPC（GraphQL）なら、変更系は全部POSTでよい。みたいなことにも言及されている
-
-[Zalando RESTful API と イベントスキーマのガイドライン](https://restful-api-guidelines-ja.netlify.app/)
-
-分量多い。良い文献らしい
-
-### QUERYメソッドというHTTPメソッド追加が提案されているらしい
-
-新しいHTTPメソッドとして、QUERYメソッドの仕様が検討されている。もし仕様策定が進むと、POSTではなくQUERYを用いる方が適切となる。
+{
+  "filter": {
+    "category": "game",
+    "price": {
+      "min": 10000
+    }
+  },
+  "sort": {
+    "by": "price",
+    "order": "desc"
+  }
+}
+```
 
 [新しいHTTPメソッド、QUERYメソッドの仕様 - ASnoKaze blog](https://asnokaze.hatenablog.com/entry/2021/11/09/231858)
