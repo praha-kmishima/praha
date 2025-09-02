@@ -172,6 +172,8 @@ src
 │   ├── query-service # 読み取り処理
 │   │   ├── student-query-service.ts
 │   │   └── team-query-service.ts
+│   │   └── task-query-service.ts
+│   │
 │   └── use-case # 書き込み処理
 │       ├── student
 │       │   ├── create-student-use-case.ts
@@ -234,4 +236,13 @@ src
 │           ├── get-task-controller.ts
 │           ├── get-task-list-controller.ts
 │           └── set-task-done-controller.ts
+│       └── student
+│           ├── student登録、取得、在席ステータス変更
+│           └── studentにassignment追加、削除
+│           └── assignmentの進捗ステータス変更
+│       └── team
+│           ├── team作成、一覧取得、チーム情報取得
+│           └── teamにメンバー追加、削除
+
+
 ```
