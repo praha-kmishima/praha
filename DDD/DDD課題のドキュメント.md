@@ -10,17 +10,21 @@
 
 task、student、team、assignmentの４つのエンティティで構成する。
 
-**student,assignment**
+**student,task**
 
-- studentが生成されたとき、80個のassignmentも生成される。タスクの進捗ステータスは未着手
  - studentFactoryを介してstudentを生成する
    - studentEmailNotDuplicated　ドメインサービスを定義して、アプリケーション層でstudent生成時は重複チェック後にファクトリーを呼び出す
-- studentはassignmentを所有している
-- studentは自分が所有しているassignmentの進捗を確認できる
-- studentはassignmentを更新でき、取り組み中、レビュー待ち、完了に変えることができる。
-- studentに紐づくassignmentを追加、削除できる
+- studentに紐づくtaskを追加、削除できる
 - studentの在籍ステータスが休会または退会になった場合、teamManegementServiceを行いチーム人数の調整が行われる、という処理は、簡便的にアプリケーション層に書く。
   - 本格的にやるならユニットオブワークのようなパターンを導入して、トランザクション管理のような形で制約を表現する。またはドメインイベント
+
+**task**
+
+- ドメインサービスがこの処理を担当する
+  - studentが生成されたとき、80個のtaskも生成される。タスクの進捗ステータスは未着手
+  - studentはtaskを更新でき、取り組み中、レビュー待ち、完了に変えることができる。
+- studentは自分が所有しているtaskの進捗を確認できる
+
 
 **team**
 
@@ -35,10 +39,10 @@ task、student、team、assignmentの４つのエンティティで構成する�
   - 参加が増えてチームが5名になる場合の自動分割処理
 - メール送信用に、mailserviceinterfaceをドメイン層においておく。インフラ層のmail/mailserviceimplで実装する。
 
-**task**
+**assignment**
 
-- taskを新しく作成できる
-- taskのタイトルを変更できる
+- assignmentを新しく作成できる
+- assignmentのタイトルを変更できる
 - 課題カテゴリは、めんどいからこのシステムだと扱わない
 
 ### 値オブジェクト
@@ -53,15 +57,18 @@ task、student、team、assignmentの４つのエンティティで構成する�
 
 ![](image-1.png)
 
+assignment
+- assignmentを作成する
+- assignmentのタイトルを変更する
+
 task
 - taskを作成する
-- taskのタイトルを変更する
+- 新しいtaskをstudentに追加、削除する
+- taskの進捗ステータスを着手、レビュー待ち、完了にする
 
-student,assignment
-- student,assignmentを作成する
+student
+- studentを作成する
 - studentを在籍、休会、退会にする　※
-- 新しいassignmentをstudentに追加、削除する
-- assignmentの進捗ステータスを着手、レビュー待ち、完了にする
 
 team
 - teamをつくる
@@ -71,100 +78,123 @@ team
 
 ## ER図
 
-![](image-3.png)
+**初期案。実装が進むごとに変更されるので、イメージとして扱うこと。**
 
-https://dbdiagram.io/d/6855053df039ec6d3619b8c0
+![](image-5.png)
+
+https://dbdiagram.io/d/Copy-of-Untitled-Diagram-68bb065161a46d388eaaaca3
 
 ```sql
 //// ------------------------------------------------------
 //// Users
 //// ------------------------------------------------------
 
-// ユーザー情報
-Table Users {
-  id int [pk, increment]
-  userStatusId int [not null, ref: > UserStatus.id]
-  emailAddress varchar(255) [unique, not null]
-  userType varchar(50) [not null, note: '例: student, admin']
-  firstName varchar(255)
-  lastName varchar(255)
-  createdAt timestamp [default: `now()`, not null]
-  updatedAt timestamp [default: `now()`, not null]
+Table users {
+  id varchar [pk]
+  user_status_id varchar [not null]
+  email_address varchar(255) [not null, unique]
+  user_type varchar(50) [not null]
+  first_name varchar(255) [not null]
+  last_name varchar(255) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
 }
 
-// ユーザーの在籍ステータスのマスターデータ
-Table UserStatus {
-  id int [pk, increment]
-  name varchar(50) [unique, not null, note: '例: 在籍, 休会, 退会']
+Table user_status {
+  id varchar [pk]
+  name varchar(50) [not null, unique]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
 }
 
-// ユーザーの在籍ステータス変更履歴
-Table UserStatusHistories {
-  id int [pk, increment]
-  userId int [not null, ref: > Users.id]
-  userStatusId int [not null, ref: > UserStatus.id]
-  createdAt timestamp [default: `now()`, not null]
+Table user_status_histories {
+  id varchar [pk]
+  user_id varchar [not null]
+  user_status_id varchar [not null]
+  changed_at timestamp [not null, default: `now()`]
+  created_at timestamp [not null, default: `now()`]
 }
-
 
 //// ------------------------------------------------------
 //// Teams
 //// ------------------------------------------------------
 
-// チーム情報
-Table Teams {
-  id int [pk, increment]
-  name varchar(255) [unique, not null]
-  createdAt timestamp [default: `now()`, not null]
-  updatedAt timestamp [default: `now()`, not null]
+Table teams {
+  id varchar [pk]
+  name varchar(255) [not null, unique]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
 }
 
-// チームのメンバー履歴
-// 誰が、いつからいつまで、どのチームに所属していたかを記録
-Table TeamMemberHistories {
-  id int [pk, increment]
-  userId int [not null, ref: > Users.id]
-  teamId int [not null, ref: > Teams.id]
-  startDate date [not null]
-  endDate date [null, note: 'NULLの場合は現在も所属中']
+Table team_memberships {
+  id varchar [pk]
+  user_id varchar [not null]
+  team_id varchar [not null]
+  start_date date [not null]
+  end_date date [note: 'NULLの場合、現在も所属中']
+  created_at timestamp [not null, default: `now()`]
 }
-
 
 //// ------------------------------------------------------
 //// Tasks & Progress
 //// ------------------------------------------------------
 
-// 課題のマスターデータ
-Table Tasks {
-  id int [pk, increment]
+Table assignments {
+  id varchar [pk]
   name varchar(255) [not null]
-  content_url varchar(2048)
-  createdAt timestamp [default: `now()`, not null]
-  updatedAt timestamp [default: `now()`, not null]
+  content_url varchar(2048) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
 }
 
-// 課題進捗ステータスのマスターデータ
-Table TaskProgress {
-  id int [pk, increment]
-  name varchar(50) [unique, not null, note: '例: 未着手, 取組中, レビュー待ち, 完了']
+Table task_progress {
+  id varchar [pk]
+  name varchar(50) [not null, unique]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
 }
 
-// 生徒ごとの課題の進捗状況
-// どの生徒が、どの課題を、どのステータスまで進めているかを記録
-Table AssignmentHistories {
-  id int [pk, increment]
-  userId int [not null, ref: > Users.id]
-  taskId int [not null, ref: > Tasks.id]
-  taskProgressId int [not null, ref: > TaskProgress.id]
-  createdAt timestamp [default: `now()`, not null]
-
+Table tasks {
+  id varchar [pk]
+  user_id varchar [not null]
+  assignment_id varchar [not null]
+  task_progress_id varchar [not null]
+  updated_at timestamp [not null]
+  
   Indexes {
-    (userId, taskId) [unique]
+    (user_id, assignment_id) [unique]
   }
 }
+
+Table task_status_histories {
+  id varchar [pk]
+  task_id varchar [not null]
+  task_progress_id varchar [not null]
+  created_at timestamp [not null]
+}
+
+//// ------------------------------------------------------
+//// Relations
+//// ------------------------------------------------------
+
+Ref: users.user_status_id > user_status.id
+Ref: user_status_histories.user_id > users.id
+Ref: user_status_histories.user_status_id > user_status.id
+
+Ref: team_memberships.user_id > users.id
+Ref: team_memberships.team_id > teams.id
+
+Ref: tasks.user_id > users.id
+Ref: tasks.assignment_id > assignments.id
+Ref: tasks.task_progress_id > task_progress.id
+
+Ref: task_status_histories.task_id > tasks.id
+Ref: task_status_histories.task_progress_id > task_progress.id
 ```
 
-### ディレクトリ構成
+### ディレクトリ構成案
+
+**初期案。実装が進むごとに変更されるので、イメージとして扱うこと。**
 
 ```bash
 src
@@ -231,15 +261,15 @@ src
 │
 ├── presentation
 │       └── task
-│           ├── create-task-controller.ts
-│           ├── edit-task-title-controller.ts
-│           ├── get-task-controller.ts
-│           ├── get-task-list-controller.ts
-│           └── set-task-done-controller.ts
+│           ├── create-assignment-controller.ts
+│           ├── edit-assignment-title-controller.ts
+│           ├── get-assignment-controller.ts
+│           ├── get-assignment-list-controller.ts
+│           └── set-assignment-done-controller.ts
 │       └── student
 │           ├── student登録、取得、在席ステータス変更
-│           └── studentにassignment追加、削除
-│           └── assignmentの進捗ステータス変更
+│           └── studentにtask追加、削除
+│           └── taskの進捗ステータス変更
 │       └── team
 │           ├── team作成、一覧取得、チーム情報取得
 │           └── teamにメンバー追加、削除
